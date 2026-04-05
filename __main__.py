@@ -157,7 +157,19 @@ def _main_impl(argv: list[str] | None = None) -> int:
         color_enabled=stream_supports_color(sys.stderr),
         report_file=None,
     )
+    
+    if args.export is not None:
+        try:
+            write_report(
+                result,
+                report_format="json",
+                color_enabled=False,
+                report_file=str(args.export),
+            )
+        except OSError as exc:
+            raise InputError(f"cannot write {args.export}: {exc}") from exc
 
+    return exit_code_from_result(result)
 
 
 
