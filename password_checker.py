@@ -184,6 +184,11 @@ def calculate_entropy(password: str) -> dict:
         "entropy_bits": round(entropy_bits, 1),
     }
 
+def grade_from_score(score: int) -> str:
+    for threshold, label in GRADE_BANDS:
+        if score >= threshold:
+            return label
+    return "Terrible"
 
 
 
