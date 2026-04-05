@@ -195,7 +195,17 @@ def top_feedback(rule_results: list[dict]) -> list[str]:
     failed_rules.sort(key=lambda item: item["max_points"] - item["points"], reverse=True)
     return [rule["feedback"] for rule in failed_rules[:3]]
 
+def analyze_password(password: str, config: dict) -> dict:
+    raw_min = config.get("min_length", 8)
+    try:
+        min_length = int(raw_min)
+    except (TypeError, ValueError) as exc:
+        raise ParseError(f"min_length must be an integer, got {raw_min!r}") from exc
+    if min_length < 1:
+        raise ValidationError("min_length must be at least 1")
 
+    include_dictionary = not config.get("no_dictionary", False)
+    include_entropy = not config.get("no_entropy", False)
 
 
 
