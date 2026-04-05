@@ -300,6 +300,14 @@ def run(input_text: str, config: dict | None = None) -> dict:
         passwords = [config["single_password"]]
     else:
         passwords = [line.rstrip("\n") for line in input_text.splitlines() if line.strip()]
+    
+    analyses = [analyze_password(password, config) for password in passwords]
+    if not analyses:
+        output = "No passwords to analyze.\n"
+    elif len(analyses) == 1:
+        output = render_single_analysis(analyses[0], bool(config.get("show_password")))
+    else:
+        output = render_batch_analysis(analyses, bool(config.get("show_password")))
 
 
 
