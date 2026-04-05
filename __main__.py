@@ -90,6 +90,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     return parser.parse_args(argv)
 
+def exit_code_from_result(result: dict) -> int:
+    for analysis in result.get("analyses") or []:
+        if analysis.get("grade") in {"Terrible", "Weak"}:
+            return 1
+    return 0
 
 
 
