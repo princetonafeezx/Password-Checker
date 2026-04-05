@@ -308,6 +308,22 @@ def run(input_text: str, config: dict | None = None) -> dict:
         output = render_single_analysis(analyses[0], bool(config.get("show_password")))
     else:
         output = render_batch_analysis(analyses, bool(config.get("show_password")))
+    
+    below_fair = [analysis for analysis in analyses if analysis["grade"] in {"Terrible", "Weak"}]
+    weakest = min(analyses, key=lambda item: item["score"], default=None)
+    average_score = round(sum(item["score"] for item in analyses) / max(len(analyses), 1), 1)
+
+    findings = []
+    for index, analysis in enumerate(analyses, start=1):
+        if analysis["grade"] in {"Terrible", "Weak"}:
+            findings.append(
+                {
+                    "severity": "medium",
+                    "category": "weak_password",
+                    "line": index,
+                    "message": f"Password at line {index} scored {analysis['score']} ({analysis['grade']}).",
+                }
+            )
 
 
 
