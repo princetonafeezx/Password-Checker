@@ -116,6 +116,30 @@ def _main_impl(argv: list[str] | None = None) -> int:
 
     stdout_color = stream_supports_color(sys.stdout)
 
+    if args.password is not None:
+        input_text = ""
+        default_source = "<cli --password>"
+        config: dict = {
+            "show_password": args.show,
+            "min_length": args.min_length,
+            "no_dictionary": args.no_dictionary,
+            "no_entropy": args.no_entropy,
+            "source_name": args.source_name or default_source,
+            "single_password": args.password,
+        }
+    else:
+        try:
+            input_text = args.file.read_text(encoding="utf-8")
+        except OSError as exc:
+            raise InputError(f"cannot read {args.file}: {exc}") from exc
+        default_source = str(args.file.resolve())
+        config = {
+            "show_password": args.show,
+            "min_length": args.min_length,
+            "no_dictionary": args.no_dictionary,
+            "no_entropy": args.no_entropy,
+            "source_name": args.source_name or default_source,
+        }
 
 
 
