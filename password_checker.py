@@ -123,6 +123,17 @@ def check_repeats(password: str) -> dict:
         "feedback": "Break up repeated characters like aaa or 111." if not passed else "No repeated streaks detected.",
     }
 
+def detect_keyboard_patterns(password: str) -> list[str]:
+    found = []
+    lowered = password.lower()
+    for row in KEYBOARD_ROWS:
+        for window_size in range(3, min(6, len(row)) + 1):
+            for index in range(len(row) - window_size + 1):
+                chunk = row[index : index + window_size]
+                # Check both forward (qwerty) and backward (ytrewq)
+                if chunk in lowered or chunk[::-1] in lowered:
+                    found.append(chunk)
+    return found
 
 
 
