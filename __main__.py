@@ -142,6 +142,14 @@ def _main_impl(argv: list[str] | None = None) -> int:
         }
 
 
+    result = run(input_text, config)
+    primary = result.get("output", "")
+    if primary.startswith("Password:"):
+        primary = colorize_grade_line(primary, color_enabled=stdout_color)
+    sys.stdout.write(primary)
+    if primary and not primary.endswith("\n"):
+        sys.stdout.write("\n")
+    sys.stdout.flush()
 
 
 
