@@ -76,7 +76,12 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         action="store_true",
         help="Skip entropy calculation.",
     )
-
+    parser.add_argument(
+        "--export",
+        type=Path,
+        metavar="PATH",
+        help="Write the full report as JSON to this path.",
+    )
 
 
 
