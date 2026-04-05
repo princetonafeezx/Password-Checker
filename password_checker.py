@@ -190,6 +190,10 @@ def grade_from_score(score: int) -> str:
             return label
     return "Terrible"
 
+def top_feedback(rule_results: list[dict]) -> list[str]:
+    failed_rules = [rule for rule in rule_results if not rule["passed"]]
+    failed_rules.sort(key=lambda item: item["max_points"] - item["points"], reverse=True)
+    return [rule["feedback"] for rule in failed_rules[:3]]
 
 
 
