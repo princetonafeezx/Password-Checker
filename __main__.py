@@ -71,7 +71,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         action="store_true",
         help="Skip the built-in common-password dictionary check.",
     )
-
+    parser.add_argument(
+        "--no-entropy",
+        action="store_true",
+        help="Skip entropy calculation.",
+    )
 
 
 
