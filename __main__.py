@@ -53,7 +53,12 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         metavar="PATH",
         help="Batch mode: read one password per non-empty line.",
     )
-
+    
+    parser.add_argument(
+        "--show",
+        action="store_true",
+        help="Show real passwords in output instead of masking.",
+    )
 
 
 
