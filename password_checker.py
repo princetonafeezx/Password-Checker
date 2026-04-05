@@ -85,6 +85,17 @@ def check_dictionary(password: str) -> dict:
         "feedback": "Choose something less common than a top-list password." if not passed else "Good: no common dictionary matches found.",
     }
 
+def detect_sequences(password: str) -> list[str]:
+    sequences = []
+    lowered = password.lower()
+    for index in range(len(lowered) - 2):
+        chunk = lowered[index : index + 3]
+        if len(set(chunk)) == 1:
+            continue
+        diffs = [ord(chunk[position + 1]) - ord(chunk[position]) for position in range(2)]
+        if diffs == [1, 1] or diffs == [-1, -1]:
+            sequences.append(chunk)
+    return sequences
 
 
 
