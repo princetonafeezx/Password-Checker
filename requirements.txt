@@ -1,0 +1,4 @@
+# Standard library only at runtime (see formatter.format_table for tables).
+
+# For testing (optional but recommended)
+pytest==8.0.0
