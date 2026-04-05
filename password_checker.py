@@ -147,6 +147,17 @@ def check_keyboard_patterns(password: str) -> dict:
         "feedback": "Avoid keyboard walks like qwerty or asdf." if not passed else "No keyboard walks detected.",
     }
 
+def character_pool_size(password: str) -> int:
+    pool_size = 0
+    if re.search(r"[a-z]", password):
+        pool_size += 26
+    if re.search(r"[A-Z]", password):
+        pool_size += 26
+    if re.search(r"\d", password):
+        pool_size += 10
+    if re.search(rf"[{re.escape(string.punctuation)}]", password):
+        pool_size += len(string.punctuation)
+    return max(pool_size, 1)
 
 
 
