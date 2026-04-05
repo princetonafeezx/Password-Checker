@@ -34,6 +34,10 @@ def colorize_grade_line(text: str, *, color_enabled: bool) -> str:
         out.append(line)
     return "\n".join(out)
 
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Score passwords with layered rules (length, diversity, dictionary, patterns, entropy).",
+    )
 
 
 
