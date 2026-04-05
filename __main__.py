@@ -19,6 +19,20 @@ GRADE_COLORS = {
     "Fortress": "green",
 }
 
+def colorize_grade_line(text: str, *, color_enabled: bool) -> str:
+    if not color_enabled:
+        return text
+    lines = text.splitlines()
+    out: list[str] = []
+    prefix = "Grade: "
+    for line in lines:
+        if line.startswith(prefix):
+            grade = line[len(prefix) :].strip()
+            color = GRADE_COLORS.get(grade)
+            if color:
+                line = f"{prefix}{colorize(grade, color, True)}"
+        out.append(line)
+    return "\n".join(out)
 
 
 
