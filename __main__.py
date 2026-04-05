@@ -96,6 +96,29 @@ def exit_code_from_result(result: dict) -> int:
             return 1
     return 0
 
+def main(argv: list[str] | None = None) -> int:
+    try:
+        return _main_impl(argv)
+    except ValidationError as exc:
+        print(f"password_checker: {exc}", file=sys.stderr)
+        return 2
+    except InputError as exc:
+        print(f"password_checker: {exc}", file=sys.stderr)
+        return 2
+    except DataGuardError as exc:
+        print(f"password_checker: {exc}", file=sys.stderr)
+        return 2
+
+
+
+
+
+
+
+
+
+
+
 
 
 
