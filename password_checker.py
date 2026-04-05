@@ -11,6 +11,7 @@ from common_passwords import COMMON_PASSWORDS
 from formatter import format_table
 
 COMMON_PASSWORDS_LOWER = frozenset(entry.lower() for entry in COMMON_PASSWORDS)
+KEYBOARD_ROWS = ["1234567890", "qwertyuiop", "asdfghjkl", "zxcvbnm"]
 
 
 
