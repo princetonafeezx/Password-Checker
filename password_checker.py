@@ -245,6 +245,17 @@ def analyze_password(password: str, config: dict) -> dict:
                 "entropy_bits": None,
             }
         )
+    
+    score = int(sum(rule["points"] for rule in rule_results))
+    grade = grade_from_score(score)
+    return {
+        "password": password,
+        "score": score,
+        "grade": grade,
+        "rules": rule_results,
+        "feedback": top_feedback(rule_results),
+        "entropy_bits": next((rule.get("entropy_bits") for rule in rule_results if rule["name"] == "entropy"), None),
+    }
 
 
 
