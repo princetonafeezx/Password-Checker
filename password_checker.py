@@ -135,6 +135,17 @@ def detect_keyboard_patterns(password: str) -> list[str]:
                     found.append(chunk)
     return found
 
+def check_keyboard_patterns(password: str) -> dict:
+    patterns = detect_keyboard_patterns(password)
+    passed = not patterns
+    return {
+        "name": "keyboard_patterns",
+        "points": 10 if passed else 0,
+        "max_points": 10,
+        "passed": passed,
+        "details": "No obvious keyboard walks found." if passed else f"Found keyboard patterns like {patterns[0]!r}.",
+        "feedback": "Avoid keyboard walks like qwerty or asdf." if not passed else "No keyboard walks detected.",
+    }
 
 
 
