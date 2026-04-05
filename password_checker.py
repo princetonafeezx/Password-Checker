@@ -330,26 +330,24 @@ def run(input_text: str, config: dict | None = None) -> dict:
         f"{len(below_fair)} password(s) fell below Fair."
     )
 
+    return {
+        "module_name": "audit",
+        "title": "DataGuard Password Audit Report",
+        "output": output,
+        "analyses": analyses,
+        "findings": findings,
+        "warnings": [f"{len(below_fair)} password(s) scored Weak or Terrible."] if below_fair else [],
+        "errors": [],
+        "stats": {
+            "passwords_analyzed": len(analyses),
+            "average_score": average_score,
+            "weakest_line": analyses.index(weakest) + 1 if weakest else "",
+            "below_fair": len(below_fair),
+        },
+        "metadata": {"source": config.get("source_name", "<input>"), "minimum_length": int(config.get("min_length", 8))},
+        "summary": summary,
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def run() -> dict:
-    pass
 
 if __name__ == "__main__":
     import runpy
