@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "config.schema.json",
+  "title": "Password Checker Runtime Config",
+  "type": "object",
+  "additionalProperties": false,
+  "description": "Configuration accepted by password_checker.run() / analyze_password().",
+  "properties": {
+    "show_password": {
+      "type": "boolean",
+      "default": false,
+      "description": "Reveal passwords in rendered output instead of masking them."
+    },
+    "min_length": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 8,
+      "description": "Minimum target length used by the length rule."
+    },
+    "no_dictionary": {
+      "type": "boolean",
+      "default": false,
+      "description": "Skip the common-password dictionary rule."
+    },
+    "no_entropy": {
+      "type": "boolean",
+      "default": false,
+      "description": "Skip entropy calculation."
+    },
+    "source_name": {
+      "type": "string",
+      "description": "Human-readable source label recorded in report metadata."
+    },
+    "single_password": {
+      "type": "string",
+      "description": "Single password to analyze; when absent, run() reads from input_text lines."
+    }
+  }
+}

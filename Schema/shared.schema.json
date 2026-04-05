@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "shared.schema.json",
+  "title": "Password Checker Shared Definitions",
+  "$defs": {
+    "grade": {
+      "type": "string",
+      "enum": [
+        "Fortress",
+        "Strong",
+        "Fair",
+        "Weak",
+        "Terrible"
+      ],
+      "description": "Qualitative grade returned by grade_from_score()."
+    },
+    "rule_name": {
+      "type": "string",
+      "enum": [
+        "length",
+        "diversity",
+        "dictionary",
+        "sequences",
+        "repeats",
+        "keyboard_patterns",
+        "entropy"
+      ],
+      "description": "Known rule identifiers used by analyze_password()."
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "critical",
+        "high",
+        "medium",
+        "low",
+        "info"
+      ],
+      "description": "Severity labels supported by formatter.py."
+    },
+    "line_or_empty": {
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "type": "string",
+          "const": ""
+        }
+      ],
+      "description": "Used by stats.weakest_line; empty string when no analyses exist."
+    }
+  }
+}

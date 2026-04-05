@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "finding.schema.json",
+  "title": "Password Checker Finding",
+  "type": "object",
+  "additionalProperties": false,
+  "description": "Weak-password finding emitted by run() for batch or single analysis results.",
+  "required": [
+    "severity",
+    "category",
+    "line",
+    "message"
+  ],
+  "properties": {
+    "severity": {
+      "$ref": "shared.schema.json#/$defs/severity"
+    },
+    "category": {
+      "type": "string",
+      "const": "weak_password",
+      "description": "Current finding category used by the repository."
+    },
+    "line": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "1-based input line number for the weak password."
+    },
+    "message": {
+      "type": "string",
+      "description": "Human-readable finding summary."
+    }
+  }
+}

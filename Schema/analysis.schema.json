@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "analysis.schema.json",
+  "title": "Password Checker Analysis",
+  "type": "object",
+  "additionalProperties": false,
+  "description": "Structured result returned by analyze_password().",
+  "required": [
+    "password",
+    "score",
+    "grade",
+    "rules",
+    "feedback",
+    "entropy_bits"
+  ],
+  "properties": {
+    "password": {
+      "type": "string",
+      "description": "Original password value. Consumers should treat this as sensitive."
+    },
+    "score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Total score across all rules."
+    },
+    "grade": {
+      "$ref": "shared.schema.json#/$defs/grade"
+    },
+    "rules": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "$ref": "rule-result.schema.json"
+      },
+      "description": "Always contains seven rule objects; skipped rules are represented as passing placeholders."
+    },
+    "feedback": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "string"
+      },
+      "description": "Top prioritized advice strings, sorted by point deficit."
+    },
+    "entropy_bits": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Convenience copy of the entropy rule's entropy_bits value."
+    }
+  }
+}

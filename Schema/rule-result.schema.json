@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rule-result.schema.json",
+  "title": "Password Checker Rule Result",
+  "type": "object",
+  "additionalProperties": false,
+  "description": "One rule evaluation entry from the analysis.rules array.",
+  "required": [
+    "name",
+    "points",
+    "max_points",
+    "passed",
+    "details",
+    "feedback"
+  ],
+  "properties": {
+    "name": {
+      "$ref": "shared.schema.json#/$defs/rule_name"
+    },
+    "points": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 20,
+      "description": "Points awarded by the rule."
+    },
+    "max_points": {
+      "type": "integer",
+      "enum": [
+        5,
+        10,
+        15,
+        20
+      ],
+      "description": "Maximum possible points for the rule."
+    },
+    "passed": {
+      "type": "boolean",
+      "description": "Whether the rule passed under the current config."
+    },
+    "details": {
+      "type": "string",
+      "description": "Detailed explanation emitted by the rule."
+    },
+    "feedback": {
+      "type": "string",
+      "description": "User-facing recommendation for improving this rule outcome."
+    },
+    "entropy_bits": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Present only for the entropy rule; null when entropy is skipped."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "name": {
+            "const": "entropy"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "then": {
+        "required": [
+          "entropy_bits"
+        ]
+      },
+      "else": {
+        "not": {
+          "required": [
+            "entropy_bits"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "metadata.schema.json",
+  "title": "Password Checker Report Metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source",
+    "minimum_length"
+  ],
+  "properties": {
+    "source": {
+      "type": "string",
+      "description": "Source label attached to the report."
+    },
+    "minimum_length": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Effective minimum length used during scoring."
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stats.schema.json",
+  "title": "Password Checker Stats",
+  "type": "object",
+  "additionalProperties": false,
+  "description": "Aggregated metrics returned in the final report.",
+  "required": [
+    "passwords_analyzed",
+    "average_score",
+    "weakest_line",
+    "below_fair"
+  ],
+  "properties": {
+    "passwords_analyzed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "average_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "weakest_line": {
+      "$ref": "shared.schema.json#/$defs/line_or_empty"
+    },
+    "below_fair": {
+      "type": "integer",
+      "minimum": 0
+    }
+  }
+}

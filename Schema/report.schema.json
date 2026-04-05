@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "report.schema.json",
+  "title": "Password Checker JSON Export Report",
+  "type": "object",
+  "additionalProperties": false,
+  "description": "Full JSON report shape produced by formatter.render_report(..., report_format='json').",
+  "required": [
+    "module_name",
+    "title",
+    "output",
+    "analyses",
+    "findings",
+    "warnings",
+    "errors",
+    "stats",
+    "metadata",
+    "summary"
+  ],
+  "properties": {
+    "module_name": {
+      "type": "string",
+      "const": "audit"
+    },
+    "title": {
+      "type": "string",
+      "const": "DataGuard Password Audit Report"
+    },
+    "output": {
+      "type": "string",
+      "description": "Human-readable primary output block (single-password block or batch table)."
+    },
+    "analyses": {
+      "type": "array",
+      "items": {
+        "$ref": "analysis.schema.json"
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "$ref": "finding.schema.json"
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "stats": {
+      "$ref": "stats.schema.json"
+    },
+    "metadata": {
+      "$ref": "metadata.schema.json"
+    },
+    "summary": {
+      "type": "string"
+    }
+  }
+}
