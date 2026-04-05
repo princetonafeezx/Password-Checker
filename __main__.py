@@ -150,7 +150,13 @@ def _main_impl(argv: list[str] | None = None) -> int:
     if primary and not primary.endswith("\n"):
         sys.stdout.write("\n")
     sys.stdout.flush()
-
+    
+    write_report(
+        result,
+        report_format="text",
+        color_enabled=stream_supports_color(sys.stderr),
+        report_file=None,
+    )
 
 
 
