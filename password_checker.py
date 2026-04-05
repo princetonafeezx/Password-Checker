@@ -279,7 +279,19 @@ def render_single_analysis(analysis: dict, show_password: bool) -> str:
             lines.append(f"- {item}")
     return "\n".join(lines)
 
-
+def render_batch_analysis(analyses: list[dict], show_password: bool) -> str:
+    rows = []
+    for analysis in analyses:
+        top_issue = analysis["feedback"][0] if analysis["feedback"] else "Looks healthy."
+        rows.append(
+            [
+                mask_password(analysis["password"], show_password),
+                analysis["score"],
+                analysis["grade"],
+                top_issue,
+            ]
+        )
+    return format_table(["Password", "Score", "Grade", "Top issue"], rows)
 
 
 
