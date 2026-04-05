@@ -31,6 +31,8 @@ def mask_password(password: str, show_password: bool) -> str:
         return "*" * len(password)
     return password[0] + "*" * (len(password) - 2) + password[-1]
 
+def normalized_password(password: str) -> str:
+    return password.lower().translate(LEET_MAP)
 
 
 
