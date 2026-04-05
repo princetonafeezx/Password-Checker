@@ -294,6 +294,14 @@ def render_batch_analysis(analyses: list[dict], show_password: bool) -> str:
     return format_table(["Password", "Score", "Grade", "Top issue"], rows)
 
 
+def run(input_text: str, config: dict | None = None) -> dict:
+    config = config or {}
+    if config.get("single_password") is not None:
+        passwords = [config["single_password"]]
+    else:
+        passwords = [line.rstrip("\n") for line in input_text.splitlines() if line.strip()]
+
+
 
 
 
