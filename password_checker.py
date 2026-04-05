@@ -51,6 +51,25 @@ def check_length(password: str, min_length: int) -> dict:
         "feedback": f"Add at least {max(min_length - length, 0)} more characters." if length < min_length else "Good length coverage.",
     }
 
+def check_diversity(password: str) -> dict:
+    classes = {
+        "lowercase": bool(re.search(r"[a-z]", password)),
+        "uppercase": bool(re.search(r"[A-Z]", password)),
+        "digits": bool(re.search(r"\d", password)),
+        "symbols": bool(re.search(rf"[{re.escape(string.punctuation)}]", password)),
+    }
+    class_count = sum(classes.values())
+    points = class_count * 5
+    missing = [name for name, present in classes.items() if not present]
+    return {
+        "name": "diversity",
+        "points": points,
+        "max_points": 20,
+        "passed": class_count >= 3,
+        "details": f"Uses {class_count} character classes.",
+        "feedback": "Add " + ", ".join(missing[:2]) + "." if missing else "Good character diversity.",
+    }
+
 
 
 
