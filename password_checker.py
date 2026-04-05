@@ -224,7 +224,13 @@ def analyze_password(password: str, config: dict) -> dict:
                 "feedback": "Dictionary check skipped.",
             }
         )
-
+    rule_results.extend(
+        [
+            check_sequences(password),
+            check_repeats(password),
+            check_keyboard_patterns(password),
+        ]
+    )
 
 
 
