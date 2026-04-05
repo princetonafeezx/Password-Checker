@@ -45,7 +45,14 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         metavar="TEXT",
         help="Analyze one password (masked in output unless --show).",
     )
-
+    
+    src.add_argument(
+        "--file",
+        "-f",
+        type=Path,
+        metavar="PATH",
+        help="Batch mode: read one password per non-empty line.",
+    )
 
 
 
