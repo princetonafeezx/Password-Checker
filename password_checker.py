@@ -70,6 +70,20 @@ def check_diversity(password: str) -> dict:
         "feedback": "Add " + ", ".join(missing[:2]) + "." if missing else "Good character diversity.",
     }
 
+def check_dictionary(password: str) -> dict:
+    lowered = password.lower()
+    leet_normalized = normalized_password(password)
+    exact_match = lowered in COMMON_PASSWORDS_LOWER
+    leet_match = leet_normalized in COMMON_PASSWORDS_LOWER
+    passed = not (exact_match or leet_match)
+    return {
+        "name": "dictionary",
+        "points": 20 if passed else 0,
+        "max_points": 20,
+        "passed": passed,
+        "details": "Compared against the built-in common-password dictionary.",
+        "feedback": "Choose something less common than a top-list password." if not passed else "Good: no common dictionary matches found.",
+    }
 
 
 
