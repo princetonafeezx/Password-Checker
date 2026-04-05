@@ -231,7 +231,20 @@ def analyze_password(password: str, config: dict) -> dict:
             check_keyboard_patterns(password),
         ]
     )
-
+    if include_entropy:
+        rule_results.append(calculate_entropy(password))
+    else:
+        rule_results.append(
+            {
+                "name": "entropy",
+                "points": 15,
+                "max_points": 15,
+                "passed": True,
+                "details": "Entropy calculation skipped by flag.",
+                "feedback": "Entropy calculation skipped.",
+                "entropy_bits": None,
+            }
+        )
 
 
 
