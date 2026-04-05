@@ -258,6 +258,39 @@ def analyze_password(password: str, config: dict) -> dict:
     }
 
 
+def render_single_analysis(analysis: dict, show_password: bool) -> str:
+    lines = [
+        f"Password: {mask_password(analysis['password'], show_password)}",
+        f"Score: {analysis['score']}/100",
+        f"Grade: {analysis['grade']}",
+    ]
+    if analysis["entropy_bits"] is not None:
+        lines.append(f"Entropy: {analysis['entropy_bits']:.1f} bits")
+    lines.append("")
+    lines.append("Rule checks:")
+    for rule in analysis["rules"]:
+        status = "PASS" if rule["passed"] else "FAIL"
+        lines.append(f"- {rule['name']}: {status} ({rule['points']}/{rule['max_points']})")
+        lines.append(f"  {rule['details']}")
+    if analysis["feedback"]:
+        lines.append("")
+        lines.append("Top advice:")
+        for item in analysis["feedback"]:
+            lines.append(f"- {item}")
+    return "\n".join(lines)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
