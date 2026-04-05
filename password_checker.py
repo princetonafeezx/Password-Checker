@@ -34,6 +34,22 @@ def mask_password(password: str, show_password: bool) -> str:
 def normalized_password(password: str) -> str:
     return password.lower().translate(LEET_MAP)
 
+def check_length(password: str, min_length: int) -> dict:
+    length = len(password)
+    if length >= 20:
+        points = 20
+    elif length >= min_length:
+        points = min(20, 12 + (length - min_length) * 1.0)
+    else:
+        points = max(0, int((length / max(min_length, 1)) * 12))
+    return {
+        "name": "length",
+        "points": int(points),
+        "max_points": 20,
+        "passed": length >= min_length,
+        "details": f"Length is {length}; minimum target is {min_length}.",
+        "feedback": f"Add at least {max(min_length - length, 0)} more characters." if length < min_length else "Good length coverage.",
+    }
 
 
 
