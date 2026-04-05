@@ -109,6 +109,12 @@ def main(argv: list[str] | None = None) -> int:
         print(f"password_checker: {exc}", file=sys.stderr)
         return 2
 
+def _main_impl(argv: list[str] | None = None) -> int:
+    args = parse_args(argv)
+    if args.min_length < 1:
+        raise ValidationError("--min-length must be at least 1")
+
+    stdout_color = stream_supports_color(sys.stdout)
 
 
 
@@ -126,8 +132,10 @@ def main(argv: list[str] | None = None) -> int:
 
 
 
-def main():
-    pass
+
+
+
+
 
 
 if __name__ == "__main__":
