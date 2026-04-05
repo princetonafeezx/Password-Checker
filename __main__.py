@@ -38,6 +38,22 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Score passwords with layered rules (length, diversity, dictionary, patterns, entropy).",
     )
+    src = parser.add_mutually_exclusive_group(required=True)
+    src.add_argument(
+        "--password",
+        "-p",
+        metavar="TEXT",
+        help="Analyze one password (masked in output unless --show).",
+    )
+
+
+
+
+
+
+
+
+
 
 
 
