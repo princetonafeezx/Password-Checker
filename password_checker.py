@@ -159,6 +159,44 @@ def character_pool_size(password: str) -> int:
         pool_size += len(string.punctuation)
     return max(pool_size, 1)
 
+def calculate_entropy(password: str) -> dict:
+    pool_size = character_pool_size(password)
+    entropy_bits = len(password) * math.log2(pool_size)
+    if entropy_bits >= 80:
+        points = 15
+        label = "Excellent"
+    elif entropy_bits >= 60:
+        points = 12
+        label = "Strong"
+    elif entropy_bits >= 40:
+        points = 8
+        label = "Moderate"
+    else:
+        points = 3
+        label = "Low"
+    return {
+        "name": "entropy",
+        "points": points,
+        "max_points": 15,
+        "passed": entropy_bits >= 40,
+        "details": f"Estimated entropy is {entropy_bits:.1f} bits ({label}).",
+        "feedback": "Increase length and character variety to raise entropy." if entropy_bits < 40 else "Entropy looks healthy.",
+        "entropy_bits": round(entropy_bits, 1),
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
