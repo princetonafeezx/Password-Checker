@@ -22,6 +22,25 @@ GRADE_BANDS = [
     (0, "Terrible"),
 ]
 
+def mask_password(password: str, show_password: bool) -> str:
+    if show_password:
+        return password
+    if not password:
+        return "<empty>"
+    if len(password) <= 2:
+        return "*" * len(password)
+    return password[0] + "*" * (len(password) - 2) + password[-1]
+
+
+
+
+
+
+
+
+
+
+
 
 
 
