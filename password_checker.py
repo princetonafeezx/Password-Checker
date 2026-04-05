@@ -206,7 +206,11 @@ def analyze_password(password: str, config: dict) -> dict:
 
     include_dictionary = not config.get("no_dictionary", False)
     include_entropy = not config.get("no_entropy", False)
-
+    
+    rule_results = [
+        check_length(password, min_length),
+        check_diversity(password),
+    ]
 
 
 
