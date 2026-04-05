@@ -97,7 +97,19 @@ def detect_sequences(password: str) -> list[str]:
             sequences.append(chunk)
     return sequences
 
-
+def check_sequences(password: str) -> dict:
+    sequences = detect_sequences(password)
+    passed = not sequences
+    detail = "No ascending or descending 3-character sequences found." if passed else f"Found sequences: {', '.join(sequences[:3])}."
+    feedback = "Avoid predictable runs like abc or 321." if not passed else "No simple sequences detected."
+    return {
+        "name": "sequences",
+        "points": 10 if passed else 0,
+        "max_points": 10,
+        "passed": passed,
+        "details": detail,
+        "feedback": feedback,
+    }
 
 
 
