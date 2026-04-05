@@ -111,7 +111,17 @@ def check_sequences(password: str) -> dict:
         "feedback": feedback,
     }
 
-
+def check_repeats(password: str) -> dict:
+    match = re.search(r"(.)\1{2,}", password)
+    passed = match is None
+    return {
+        "name": "repeats",
+        "points": 5 if passed else 0,
+        "max_points": 5,
+        "passed": passed,
+        "details": "No repeated 3-character streaks found." if passed else f"Repeated streak {match.group(0)!r} is guessable.",
+        "feedback": "Break up repeated characters like aaa or 111." if not passed else "No repeated streaks detected.",
+    }
 
 
 
