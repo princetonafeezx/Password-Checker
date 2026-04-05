@@ -66,7 +66,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         metavar="N",
         help="Minimum length target for scoring (default: 8).",
     )
-
+    parser.add_argument(
+        "--no-dictionary",
+        action="store_true",
+        help="Skip the built-in common-password dictionary check.",
+    )
 
 
 
