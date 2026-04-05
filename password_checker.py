@@ -211,7 +211,19 @@ def analyze_password(password: str, config: dict) -> dict:
         check_length(password, min_length),
         check_diversity(password),
     ]
-
+    if include_dictionary:
+        rule_results.append(check_dictionary(password))
+    else:
+        rule_results.append(
+            {
+                "name": "dictionary",
+                "points": 20,
+                "max_points": 20,
+                "passed": True,
+                "details": "Dictionary check skipped by flag.",
+                "feedback": "Dictionary check skipped.",
+            }
+        )
 
 
 
