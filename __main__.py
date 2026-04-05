@@ -59,7 +59,13 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         action="store_true",
         help="Show real passwords in output instead of masking.",
     )
-
+    parser.add_argument(
+        "--min-length",
+        type=int,
+        default=8,
+        metavar="N",
+        help="Minimum length target for scoring (default: 8).",
+    )
 
 
 
