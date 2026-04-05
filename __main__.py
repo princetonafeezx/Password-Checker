@@ -82,7 +82,13 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         metavar="PATH",
         help="Write the full report as JSON to this path.",
     )
-
+    parser.add_argument(
+        "--source-name",
+        default=None,
+        metavar="LABEL",
+        help="Metadata label for the report (default: file path or <cli --password>).",
+    )
+    return parser.parse_args(argv)
 
 
 
