@@ -325,6 +325,10 @@ def run(input_text: str, config: dict | None = None) -> dict:
                 }
             )
 
+    summary = (
+        f"Analyzed {len(analyses)} password(s); average score {average_score:.1f}. "
+        f"{len(below_fair)} password(s) fell below Fair."
+    )
 
 
 
